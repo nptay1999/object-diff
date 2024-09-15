@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`diff function should generate the correct diff for oldData and newData with specific keys for arrays 1`] = `[]`;
