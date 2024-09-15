@@ -37,7 +37,25 @@ export const diff = (
   newObj: any,
   options: TCompareOptions,
 ): IChange[] => {
-  return compare(oldObj, newObj, [], options)
+  let { embeddedObjKeys } = options
+  // Trim leading '.' from keys in embeddedObjKeys
+  if (embeddedObjKeys instanceof Map) {
+    embeddedObjKeys = new Map(
+      Array.from(embeddedObjKeys.entries()).map(([key, value]) => [
+        key instanceof RegExp ? key : key.replace(/^\./, ''),
+        value,
+      ]),
+    )
+  } else if (embeddedObjKeys) {
+    embeddedObjKeys = Object.fromEntries(
+      Object.entries(embeddedObjKeys).map(([key, value]) => [
+        key.replace(/^\./, ''),
+        value,
+      ]),
+    )
+  }
+
+  return compare(oldObj, newObj, [], { ...options, embeddedObjKeys })
 }
 
 export const getObjectType = (

@@ -1,6 +1,6 @@
 {
   "name": "json-object-diff",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/json-object-diff.min.js",
   "types": "dist/index.d.ts",
   "files": [
