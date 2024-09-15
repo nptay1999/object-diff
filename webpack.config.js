@@ -8,7 +8,7 @@ const common = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
     library: {
-      name: 'object-diff',
+      name: 'json-object-diff',
       type: 'umd',
     },
     globalObject: 'this',
@@ -57,14 +57,14 @@ const dev = merge(common, {
   mode: 'development',
   devtool: 'eval-cheap-module-source-map',
   output: {
-    filename: 'object-diff.js',
+    filename: 'json-object-diff.js',
   },
 })
 
 const prod = merge(common, {
   mode: 'production',
   output: {
-    filename: 'object-diff.min.js',
+    filename: 'json-object-diff.min.js',
   },
   optimization: {
     minimize: true,

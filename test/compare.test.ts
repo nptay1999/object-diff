@@ -5,7 +5,7 @@ import {
   getKey,
   getObjectKey,
   getObjectType,
-} from './../src/compare'
+} from './../src'
 
 jest.mock('lodash', () => ({
   keyBy: jest.fn(),
