@@ -1,6 +1,6 @@
 {
   "name": "json-object-diff",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/json-object-diff.min.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -10,7 +10,7 @@
     "dev": "rm -rf dist && webpack --mode=development --config webpack.config.js",
     "build": "rm -rf dist && webpack --mode=production --config webpack.config.js && tsc --emitDeclarationOnly",
     "prepublishOnly": "npm run test && npm run build",
-    "preview": "node dist/object-diff.min.js",
+    "preview": "node dist/json-object-diff.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",

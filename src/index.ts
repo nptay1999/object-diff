@@ -117,10 +117,25 @@ export const compare = (
     oldObjType !== ObjectType.Undefined &&
     newObjType === ObjectType.Undefined
   ) {
+    let diffs: any[] = []
+    if (oldObjType === ObjectType.Object) {
+      diffs = compareObject(oldObj, {}, path, options)
+    }
     changes.push({
       type: Operation.REMOVE,
       key: getKey(path),
-      oldValue: oldObj,
+      oldValue: diffs?.length ? undefined : oldObj,
+      changes: diffs?.length ? diffs[0].changes : undefined,
+    })
+    return changes
+  }
+
+  if (oldObjType === ObjectType.Undefined && newObjType == ObjectType.Object) {
+    const diffs = compareObject({}, newObj, path, options)
+    changes.push({
+      type: Operation.ADD,
+      key: getKey(path),
+      changes: diffs[0].changes,
     })
     return changes
   }
