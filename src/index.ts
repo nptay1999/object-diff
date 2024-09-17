@@ -118,10 +118,12 @@ export const compare = (
     newObjType === ObjectType.Undefined
   ) {
     let diffs: any[] = []
+    let uniqKey: string | undefined = undefined
     if (oldObjType === ObjectType.Object) {
       diffs = compareObject(oldObj, {}, path, options)
     }
     if (oldObjType === ObjectType.Array) {
+      uniqKey = getObjectKey(options.embeddedObjKeys, path) ?? '$index'
       diffs = compareArray(oldObj, [], path, options)
     }
     changes.push({
@@ -129,6 +131,7 @@ export const compare = (
       key: getKey(path),
       oldValue: diffs?.length ? undefined : oldObj,
       changes: diffs?.length ? diffs[0].changes : undefined,
+      embeddedKey: uniqKey,
     })
     return changes
   }
@@ -144,10 +147,12 @@ export const compare = (
   }
 
   if (oldObjType === ObjectType.Undefined && newObjType == ObjectType.Array) {
+    const uniqKey = getObjectKey(options.embeddedObjKeys, path) ?? '$index'
     const diffs = compareArray([], newObj, path, options)
     changes.push({
       type: Operation.ADD,
       key: getKey(path),
+      embeddedKey: uniqKey,
       changes: diffs[0].changes,
     })
     return changes
