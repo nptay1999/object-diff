@@ -136,7 +136,10 @@ export const compare = (
     return changes
   }
 
-  if (oldObjType === ObjectType.Undefined && newObjType == ObjectType.Object) {
+  if (
+    (oldObjType === ObjectType.Undefined || oldObjType === null) &&
+    newObjType == ObjectType.Object
+  ) {
     const diffs = compareObject({}, newObj, path, options)
     changes.push({
       type: Operation.ADD,
@@ -146,7 +149,10 @@ export const compare = (
     return changes
   }
 
-  if (oldObjType === ObjectType.Undefined && newObjType == ObjectType.Array) {
+  if (
+    (oldObjType === ObjectType.Undefined || oldObjType === null) &&
+    newObjType == ObjectType.Array
+  ) {
     const uniqKey = getObjectKey(options.embeddedObjKeys, path) ?? '$index'
     const diffs = compareArray([], newObj, path, options)
     changes.push({
